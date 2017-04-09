@@ -1,6 +1,6 @@
 package com.jlinalg.graphic;
 
-import com.jlinalg.matrices.Matrix;
+import com.jlinalg.math.Matrix;
 
 public class Printer {
 	
