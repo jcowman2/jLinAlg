@@ -90,6 +90,27 @@ public class Matrix {
 	}
 	
 	/**
+	 * Returns the value of a single entry in the matrix.
+	 * @param row row at which the entry is to retrieved
+	 * @param col column at which the entry is to be retrieved
+	 * @return the value of the specified entry
+	 * @throws IllegalArgumentException if <code>row</code> or <code>col</code> are outside
+	 * the dimensions of the matrix. 
+	 */
+	public double getEntry(int row, int col) {
+		
+		if (row < 1 || row > this.numRows()) {
+			throw new IllegalArgumentException("Invalid row parameter.");
+		}
+		
+		if (col < 1 || col > this.numCols()) {
+			throw new IllegalArgumentException("Invalid column parameter.");
+		}
+		
+		return this.rows.get(row-1).get(col-1);
+	}
+	
+	/**
 	 * Sets the value of every element in the main diagonal of the matrix.
 	 * @param value number to which each element in the main diagonal is changed
 	 * @return the new value of each element in the diagonal
@@ -106,6 +127,14 @@ public class Matrix {
 		}
 		
 		return value;
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		//TODO
+		
+		return sb.toString();
 	}
 	
 }
