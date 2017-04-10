@@ -1,4 +1,6 @@
-package com.jlinalg.matrices;
+package testing;
+
+import com.jlinalg.math.Matrix;
 
 public class Driver {
 	

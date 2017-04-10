@@ -1,4 +1,4 @@
-package com.jlinalg.matrices;
+package com.jlinalg.math;
 
 import java.util.ArrayList;
 
