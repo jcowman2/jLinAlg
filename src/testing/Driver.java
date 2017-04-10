@@ -1,6 +1,7 @@
 package testing;
 
 import com.jlinalg.math.Matrix;
+import com.jlinalg.graphic.Printer;
 
 public class Driver {
 	
@@ -12,6 +13,8 @@ public class Driver {
 		zeroMatrix.setDiagonal(11.5);
 		System.out.println("(3,3): " + Double.toString(zeroMatrix.getEntry(3, 3)));
 		System.out.println("(3,4): " + Double.toString(zeroMatrix.getEntry(3, 4)));
+		
+		System.out.println(Printer.matrixToString(zeroMatrix));
 		
 	}
 	
