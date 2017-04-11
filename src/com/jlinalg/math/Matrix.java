@@ -78,11 +78,11 @@ public class Matrix {
 	public double setEntry(int row, int col, double value) {
 		
 		if (row < 1 || row > this.numRows()) {
-			throw new IllegalArgumentException("Invalid row parameter.");
+			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row));
 		}
 		
 		if (col < 1 || col > this.numCols()) {
-			throw new IllegalArgumentException("Invalid column parameter.");
+			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col));
 		}
 		
 		this.rows.get(row-1).set(col-1, value);
@@ -95,19 +95,34 @@ public class Matrix {
 	 * @param col column at which the entry is to be retrieved
 	 * @return the value of the specified entry
 	 * @throws IllegalArgumentException if <code>row</code> or <code>col</code> are outside
-	 * the dimensions of the matrix. 
+	 * the dimensions of the matrix.
 	 */
 	public double getEntry(int row, int col) {
 		
 		if (row < 1 || row > this.numRows()) {
-			throw new IllegalArgumentException("Invalid row parameter.");
+			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row));
 		}
 		
 		if (col < 1 || col > this.numCols()) {
-			throw new IllegalArgumentException("Invalid column parameter.");
+			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col));
 		}
 		
 		return this.rows.get(row-1).get(col-1);
+	}
+	
+	/**
+	 * Returns an <code>ArrayList</code> containing the entries of a single row in the matrix.
+	 * @param row the row to be retrieved
+	 * @return an <code>ArrayList</code> of the entries in the specified row
+	 * @throws IllegalArgumentException if <code>row</code> is outside the dimension of the matrix.
+	 */
+	public ArrayList<Double> getRow(int row) {
+		
+		if (row < 1 || row > this.numRows()) {
+			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row));
+		}
+		
+		return new ArrayList<Double>(this.rows.get(row-1));
 	}
 	
 	/**
