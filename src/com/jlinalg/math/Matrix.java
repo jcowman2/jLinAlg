@@ -126,6 +126,27 @@ public class Matrix {
 	}
 	
 	/**
+	 * Returns an <code>ArrayList</code> containing the entries of a single column in the matrix.
+	 * @param col the column to be retrieved
+	 * @return an <code>ArrayList</code> of the entries in the specified column
+	 * @throws IllegalArgumentException if <code>col</code> is outside the dimension of the matrix.
+	 */
+	public ArrayList<Double> getColumn(int col) {
+		
+		if (col < 1 || col > this.numCols()) {
+			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col));
+		}
+		
+		ArrayList<Double> column = new ArrayList<Double>();
+		
+		for (int row = 0; row < this.rows.size(); row++) {
+			column.add(this.rows.get(row).get(col-1));
+		}
+		
+		return column;
+	}
+	
+	/**
 	 * Sets the value of every element in the main diagonal of the matrix.
 	 * @param value number to which each element in the main diagonal is changed
 	 * @return the new value of each element in the diagonal
