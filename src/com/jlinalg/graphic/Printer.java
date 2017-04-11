@@ -19,6 +19,11 @@ public class Printer {
 		strb.append(VERTICAL_BEAM).append(" 0").append(" 0").append(" 1").append(" ").append(VERTICAL_BEAM).append("\n");
 		strb.append(DOWN_RIGHT_ELBOW).append("       ").append(DOWN_LEFT_ELBOW).append("\n");
 		
+		//Get longest row length
+		//Get longest element length for each column
+		//Print each row:
+			//Center each element in each column
+		
 		return strb.toString();
 	}
 
