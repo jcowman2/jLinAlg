@@ -10,7 +10,7 @@ public class Printer {
 	private static final String UP_LEFT_ELBOW = "\u2510";
 	private static final String DOWN_LEFT_ELBOW = "\u2518";
 	
-	public static String matrixToString(Matrix matrix) { //TODO
+	public static String matrixToString(Matrix matrix) {
 		
 		int columnWidths[] = new int[matrix.numCols()];
 		String elementStrings[][] = new String[matrix.numRows()][];
@@ -55,6 +55,10 @@ public class Printer {
 	
 	public static String elementToString(double n) {
 		
+		if (n == -0.0) {
+			n = 0.0;
+		}
+		
 		String str = Double.toString(n);
 		
 		int decimalIndex = str.length() - 1;
@@ -86,8 +90,8 @@ public class Printer {
 		int leftPad = 0;
 		int rightPad = 0;
 		
-		leftPad = padLength / 2;
-		rightPad = padLength - leftPad;
+		rightPad = padLength / 2;
+		leftPad = padLength - rightPad;
 		
 		StringBuilder strb = new StringBuilder();
 		

@@ -1,13 +1,13 @@
 package testing;
 
-import com.jlinalg.math.Matrix;
-import com.jlinalg.graphic.Printer;
+import com.jlinalg.math.*;
+import com.jlinalg.graphic.*;
 
 public class VisualTest {
 	
 	public static void test() {
 		
-		testMatrixToString();
+		//testMatrixToString();
 		
 		//testElementToString();
 		
