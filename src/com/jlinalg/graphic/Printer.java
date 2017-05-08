@@ -11,13 +11,6 @@ public class Printer {
 	private static final String DOWN_LEFT_ELBOW = "\u2518";
 	
 	public static String matrixToString(Matrix matrix) { //TODO
-		StringBuilder strb = new StringBuilder();
-		
-		strb.append(UP_RIGHT_ELBOW).append("       ").append(UP_LEFT_ELBOW).append("\n");
-		strb.append(VERTICAL_BEAM).append(" 1").append(" 0").append(" 0").append(" ").append(VERTICAL_BEAM).append("\n");
-		strb.append(VERTICAL_BEAM).append(" 0").append(" 1").append(" 0").append(" ").append(VERTICAL_BEAM).append("\n");
-		strb.append(VERTICAL_BEAM).append(" 0").append(" 0").append(" 1").append(" ").append(VERTICAL_BEAM).append("\n");
-		strb.append(DOWN_RIGHT_ELBOW).append("       ").append(DOWN_LEFT_ELBOW).append("\n");
 		
 		int columnWidths[] = new int[matrix.numCols()];
 		String elementStrings[][] = new String[matrix.numRows()][];
@@ -36,25 +29,28 @@ public class Printer {
 		
 		int innerLineSpace = 0;
 		for (int w : columnWidths) {
-			innerLineSpace += w;
+			innerLineSpace += w + 2;
 		}
-		innerLineSpace += matrix.numCols() - 1;
 		
-		StringBuilder strb2 = new StringBuilder();
+		StringBuilder strb = new StringBuilder();
 		
-		strb2.append(UP_RIGHT_ELBOW).append(String.format("%"+innerLineSpace+"s", "")).append(UP_LEFT_ELBOW).append("\n");
+		strb.append(UP_RIGHT_ELBOW).append(String.format("%"+innerLineSpace+"s", "")).append(UP_LEFT_ELBOW).append("\n");
 		
-		for (String rowElements[] : elementStrings) {
-			strb2.append(VERTICAL_BEAM);
-			for (String e : rowElements) {
-				
+		for (int r = 0; r < matrix.numRows(); r++) {
+			
+			strb.append(VERTICAL_BEAM);
+			
+			for (int c = 0; c < matrix.numCols(); c++) {
+				strb.append(" ").append(centerString(elementStrings[r][c], columnWidths[c])).append(" ");
 			}
-			strb2.append(VERTICAL_BEAM).append("\n");
+			
+			strb.append(VERTICAL_BEAM).append("\n");
+			
 		}
 		
-		strb2.append(DOWN_RIGHT_ELBOW).append(String.format("%"+innerLineSpace+"s", "")).append(DOWN_LEFT_ELBOW).append("\n");
+		strb.append(DOWN_RIGHT_ELBOW).append(String.format("%"+innerLineSpace+"s", "")).append(DOWN_LEFT_ELBOW).append("\n");
 		
-		return strb.append(strb2.toString()).toString();
+		return strb.toString();
 	}
 	
 	public static String elementToString(double n) {

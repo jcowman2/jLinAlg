@@ -6,8 +6,9 @@ public class MatrixBehaviorTest {
 	
 	public static void test() {
 		
-		testDefaultConstruction();
-		testSettingDiagonal();
+		//testDefaultConstruction();
+		
+		//testSettingDiagonal();
 		
 	}
 	

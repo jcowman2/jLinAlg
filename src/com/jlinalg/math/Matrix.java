@@ -2,6 +2,8 @@ package com.jlinalg.math;
 
 import java.util.ArrayList;
 
+import com.jlinalg.graphic.Printer;
+
 /**
  * Generates and performs basic operations on matrices of doubles.
  * @author Joe Cowman
@@ -166,11 +168,7 @@ public class Matrix {
 	}
 	
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		
-		//TODO
-		
-		return sb.toString();
+		return Printer.matrixToString(this);
 	}
 	
 }
