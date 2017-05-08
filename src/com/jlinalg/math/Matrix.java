@@ -167,6 +167,32 @@ public class Matrix {
 		return value;
 	}
 	
+	/**
+	 * Swaps two rows in the matrix.
+	 * @param row1 
+	 * @param row2
+	 * @throws IllegalArgumentException if either row is outside the dimension of the matrix.
+	 */
+	public void swapRows(int row1, int row2) {
+		
+		if (row1 < 1 || row1 > this.numRows()) {
+			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row1));
+		}
+		
+		if (row2 < 1 || row2 > this.numRows()) {
+			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row2));
+		}
+		
+		if (row1 == row2) {
+			return;
+		}
+		
+		ArrayList<Double> tempRow = this.rows.get(row1 - 1);
+		this.rows.set(row1 - 1, this.rows.get(row2 - 1));
+		this.rows.set(row2 - 1, tempRow);
+		
+	}
+	
 	public String toString() {
 		return Printer.matrixToString(this);
 	}
