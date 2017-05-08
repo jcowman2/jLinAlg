@@ -86,8 +86,8 @@ public class Printer {
 		int leftPad = 0;
 		int rightPad = 0;
 		
-		leftPad = padLength / 2;
-		rightPad = padLength - leftPad;
+		rightPad = padLength / 2;
+		leftPad = padLength - rightPad;
 		
 		StringBuilder strb = new StringBuilder();
 		

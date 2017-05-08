@@ -128,6 +128,28 @@ public class Matrix {
 	}
 	
 	/**
+	 * Changes every element in a row of the matrix to the given value
+	 * @param row
+	 * @param value
+	 * @return the new value of every element in the modified row
+	 * @throws IllegalArgumentException if <code>row</code> is outside the dimension of the matrix.
+	 */
+	public double fillRow(int row, double value) {
+		
+		if (row < 1 || row > this.numRows()) {
+			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row));
+		}
+		
+		row--;
+		
+		for (int i = 0; i < this.numCols(); i++) {
+			this.rows.get(row).set(i, value);
+		}
+		
+		return value;
+	}
+	
+	/**
 	 * Returns an <code>ArrayList</code> containing the entries of a single column in the matrix.
 	 * @param col the column to be retrieved
 	 * @return an <code>ArrayList</code> of the entries in the specified column
@@ -146,6 +168,29 @@ public class Matrix {
 		}
 		
 		return column;
+		
+	}
+	
+	/**
+	 * Changes every element in a column of the matrix to the given value
+	 * @param col
+	 * @param value
+	 * @return the new value of every element in the modified column
+	 * @throws IllegalArgumentException if <code>col</code> is outside the dimension of the matrix.
+	 */
+	public double fillColumn(int col, double value) {
+		
+		if (col < 1 || col > this.numCols()) {
+			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col));
+		}
+		
+		col--;
+		
+		for (int i = 0; i < this.numRows(); i++) {
+			this.rows.get(i).set(col, value);
+		}
+		
+		return value;
 	}
 	
 	/**
@@ -187,9 +232,43 @@ public class Matrix {
 			return;
 		}
 		
-		ArrayList<Double> tempRow = this.rows.get(row1 - 1);
-		this.rows.set(row1 - 1, this.rows.get(row2 - 1));
-		this.rows.set(row2 - 1, tempRow);
+		row1--;
+		row2--;
+		
+		ArrayList<Double> tempRow = this.rows.get(row1);
+		this.rows.set(row1, this.rows.get(row2));
+		this.rows.set(row2, tempRow);
+		
+	}
+	
+	/**
+	 * Swaps two columns in a matrix.
+	 * @param col1
+	 * @param col2
+	 * @throws IllegalArgumentException if either column is outside the dimension of the matrix.
+	 */
+	public void swapColumns(int col1, int col2) {
+		
+		if (col1 < 1 || col1 > this.numCols()) {
+			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col1));
+		}
+		
+		if (col2 < 1 || col2 > this.numCols()) {
+			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col2));
+		}
+		
+		if (col1 == col2) {
+			return;
+		}
+		
+		col1--;
+		col2--;
+		
+		for (int r = 0; r < this.numRows(); r++) {
+			double temp = this.rows.get(r).get(col1);
+			this.rows.get(r).set(col1, this.rows.get(r).get(col2));
+			this.rows.get(r).set(col2, temp);
+		}
 		
 	}
 	
