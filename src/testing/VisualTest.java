@@ -9,7 +9,9 @@ public class VisualTest {
 		
 		testMatrixToString();
 		
-		testDoubleToString();
+		testElementToString();
+		
+		testCenterString();
 		
 	}
 	
@@ -28,14 +30,25 @@ public class VisualTest {
 		System.out.println("\n");
 	}
 	
-	public static void testDoubleToString() {
+	public static void testElementToString() {
 		
 		System.out.println("\n~Converting doubles to strings");
 		
 		double doubs[] = {0., -0, -1, 0.30, 0.423498273, 9191827391283., -123.00001, 04.000000};
 		
 		for (double d : doubs) {
-			System.out.println(Printer.doubleToString(d));
+			System.out.println(Printer.elementToString(d));
+		}
+		
+	}
+	
+	public static void testCenterString() {
+		
+		System.out.println("\n~Centering strings");
+		
+		String strings[] = {"dogy", "a", "ohyes", "woooot", "bab"};
+		for (String s : strings) {
+			System.out.println("|" + Printer.centerString(s, 7) + "|");
 		}
 		
 	}

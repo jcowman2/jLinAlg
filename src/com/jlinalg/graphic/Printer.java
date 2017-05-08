@@ -19,15 +19,45 @@ public class Printer {
 		strb.append(VERTICAL_BEAM).append(" 0").append(" 0").append(" 1").append(" ").append(VERTICAL_BEAM).append("\n");
 		strb.append(DOWN_RIGHT_ELBOW).append("       ").append(DOWN_LEFT_ELBOW).append("\n");
 		
-		//Get longest row length
-		//Get longest element length for each column
-		//Print each row:
-			//Center each element in each column
+		int columnWidths[] = new int[matrix.numCols()];
+		String elementStrings[][] = new String[matrix.numRows()][];
 		
-		return strb.toString();
+		for (int r = 0; r < matrix.numRows(); r++) {
+			
+			elementStrings[r] = new String[matrix.numCols()];
+			
+			for (int c = 0; c < matrix.numCols(); c++) {
+				String elementString = elementToString(matrix.getEntry(r + 1, c + 1));
+				elementStrings[r][c] = elementString;
+				columnWidths[c] = Math.max(elementString.length(), columnWidths[c]);
+			}
+			
+		}
+		
+		int innerLineSpace = 0;
+		for (int w : columnWidths) {
+			innerLineSpace += w;
+		}
+		innerLineSpace += matrix.numCols() - 1;
+		
+		StringBuilder strb2 = new StringBuilder();
+		
+		strb2.append(UP_RIGHT_ELBOW).append(String.format("%"+innerLineSpace+"s", "")).append(UP_LEFT_ELBOW).append("\n");
+		
+		for (String rowElements[] : elementStrings) {
+			strb2.append(VERTICAL_BEAM);
+			for (String e : rowElements) {
+				
+			}
+			strb2.append(VERTICAL_BEAM).append("\n");
+		}
+		
+		strb2.append(DOWN_RIGHT_ELBOW).append(String.format("%"+innerLineSpace+"s", "")).append(DOWN_LEFT_ELBOW).append("\n");
+		
+		return strb.append(strb2.toString()).toString();
 	}
 	
-	public static String doubleToString(double n) {
+	public static String elementToString(double n) {
 		
 		String str = Double.toString(n);
 		
@@ -42,6 +72,43 @@ public class Printer {
 		}
 		
 		return str;
+		
+	}
+	
+	public static String elementToString(int i) {
+		return Integer.toString(i);
+	}
+	
+	public static String centerString(String str, int totalWidth) {
+		
+		int padLength = totalWidth - str.length();
+		
+		if (padLength <= 0) {
+			return str;
+		}
+		
+		int leftPad = 0;
+		int rightPad = 0;
+		
+		leftPad = padLength / 2;
+		rightPad = padLength - leftPad;
+		
+		StringBuilder strb = new StringBuilder();
+		
+		while (leftPad > 0) {
+			strb.append(" ");
+			leftPad--;
+		}
+		
+		strb.append(str);
+		
+		while (rightPad > 0) {
+			strb.append(" ");
+			rightPad--;
+		}
+		
+		return strb.toString();
+		
 	}
 
 }
