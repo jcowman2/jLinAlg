@@ -26,5 +26,22 @@ public class Printer {
 		
 		return strb.toString();
 	}
+	
+	public static String doubleToString(double n) {
+		
+		String str = Double.toString(n);
+		
+		int decimalIndex = str.length() - 1;
+		
+		while (str.charAt(decimalIndex) == '0') {
+			decimalIndex--;
+		}
+
+		if (str.charAt(decimalIndex) == '.') {
+			str = str.substring(0, decimalIndex);
+		}
+		
+		return str;
+	}
 
 }
