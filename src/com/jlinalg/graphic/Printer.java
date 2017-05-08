@@ -55,6 +55,10 @@ public class Printer {
 	
 	public static String elementToString(double n) {
 		
+		if (n == -0.0) {
+			n = 0.0;
+		}
+		
 		String str = Double.toString(n);
 		
 		int decimalIndex = str.length() - 1;

@@ -21,6 +21,8 @@ public class MatrixBehaviorTest {
 		
 		testColumnFill();
 		
+		testGenerateRandom();
+		
 	}
 	
 	public static void testDefaultConstruction() {
@@ -109,6 +111,27 @@ public class MatrixBehaviorTest {
 		m.fillColumn(1, 0);
 		m.fillColumn(3, 0);
 		
+		System.out.println(m);
+		
+	}
+	
+	public static void testGenerateRandom() {
+		
+		System.out.println("\n~Testing generating several random matrices");
+		
+		System.out.println("-> 3x4 integer matrix between 0 and 100");
+		
+		Matrix m = MatrixGenerator.generateRandom(3, 4, 0, 100);
+		System.out.println(m);
+		
+		System.out.println("-> 3x3 double matrix between 0 and 100, precision 3");
+		
+		m = MatrixGenerator.generateRandom(3, 3, 0, 100, 3);
+		System.out.println(m);
+		
+		System.out.println("-> 5x5 double matrix between -5 and 5, precision 1");
+		
+		m = MatrixGenerator.generateRandom(5, 5, -5, 5, 1);
 		System.out.println(m);
 		
 	}
