@@ -10,7 +10,7 @@ public class Printer {
 	private static final String UP_LEFT_ELBOW = "\u2510";
 	private static final String DOWN_LEFT_ELBOW = "\u2518";
 	
-	public static String matrixToString(Matrix matrix) { //TODO
+	public static String matrixToString(Matrix matrix) {
 		
 		int columnWidths[] = new int[matrix.numCols()];
 		String elementStrings[][] = new String[matrix.numRows()][];

@@ -1,36 +1,45 @@
 package testing;
 
-import com.jlinalg.math.Matrix;
+import com.jlinalg.math.*;
+import com.jlinalg.graphic.*;
 
 public class MatrixBehaviorTest {
 	
 	public static void test() {
 		
-		//testDefaultConstruction();
+		testDefaultConstruction();
 		
-		//testSettingDiagonal();
+		testSettingDiagonal();
+		
+		testIdentity();
 		
 	}
 	
 	public static void testDefaultConstruction() {
 		
-		System.out.println("\n~Constructing a 5x5 default matrix");
+		System.out.println("\n~Constructing a default matrix");
 		
-		Matrix zeroMatrix = new Matrix(5, 5);
-		System.out.println("(3,3): " + Double.toString(zeroMatrix.getEntry(3, 3)));
-		System.out.println("(3,4): " + Double.toString(zeroMatrix.getEntry(3, 4)));
+		Matrix m = new Matrix(5, 5);
+		System.out.println(m.toString());
 		
 	}
 	
 	public static void testSettingDiagonal() {
 		
-		System.out.println("\n~Setting the main diagonal of a 5x5 matrix");
+		System.out.println("\n~Setting the main diagonal of a matrix");
 		
-		Matrix zeroMatrix = new Matrix(5, 5);
-		zeroMatrix.setDiagonal(11.5);
-		System.out.println("(3,3): " + Double.toString(zeroMatrix.getEntry(3, 3)));
-		System.out.println("(3,4): " + Double.toString(zeroMatrix.getEntry(3, 4)));
+		Matrix m = new Matrix(6, 4);
+		m.setDiagonal(11.5);
+		System.out.println(m.toString());
 		
+	}
+	
+	public static void testIdentity() {
+		
+		System.out.println("\n~Generating an identity matrix");
+		
+		Matrix identity = MatrixGenerator.generateIdentity(10);
+		System.out.println(identity.toString());
 	}
 
 }
