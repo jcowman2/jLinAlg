@@ -6,7 +6,7 @@ import com.jlinalg.graphic.*;
 public class MatrixBehaviorTest {
 	
 	public static void test() {
-		/*
+		
 		testDefaultConstruction();
 		
 		testSettingDiagonal();
@@ -22,7 +22,7 @@ public class MatrixBehaviorTest {
 		testColumnFill();
 		
 		testGenerateRandom();
-		*/
+		
 	}
 	
 	public static void testDefaultConstruction() {
