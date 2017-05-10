@@ -1,5 +1,9 @@
 package com.jlinalg.graphic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.jlinalg.math.Matrix;
 
 public class Printer {
@@ -48,7 +52,7 @@ public class Printer {
 			
 		}
 		
-		strb.append(DOWN_RIGHT_ELBOW).append(String.format("%"+innerLineSpace+"s", "")).append(DOWN_LEFT_ELBOW).append("\n");
+		strb.append(DOWN_RIGHT_ELBOW).append(String.format("%"+innerLineSpace+"s", "")).append(DOWN_LEFT_ELBOW);
 		
 		return strb.toString();
 	}
@@ -109,6 +113,146 @@ public class Printer {
 		
 		return strb.toString();
 		
+	}
+	
+	public static String alignStringBlocks(List<String> strings, int lineLength, int spacesBetween, 
+			boolean justifyCenter) {
+		
+		StringBuilder strb = new StringBuilder();
+		
+		ArrayList<ArrayList<String>> blockList = new ArrayList<ArrayList<String>>();
+		
+		for (String str : strings) { //Convert flat strings into rectangular string blocks
+			
+			ArrayList<String> tempLines = new ArrayList<String>(Arrays.asList(str.split("\n")));
+			
+			while (tempLines.contains("")) {
+				tempLines.remove("");
+			}
+			
+			if (tempLines.size() > 1) {
+			
+				int maxLength = tempLines.get(0).length();
+				
+				for (String line : tempLines.subList(1, tempLines.size())) {
+					if (line.length() > maxLength) {
+						maxLength = line.length();
+					}
+				}
+				
+				if (justifyCenter) {
+				
+					for (int i = 0; i < tempLines.size(); i++) {
+						tempLines.set(i, centerString(tempLines.get(i), maxLength));
+					}
+				
+				} else { //justify left
+					
+					for (int i = 0; i < tempLines.size(); i++) {
+						
+						StringBuilder wordStrb = new StringBuilder();
+						wordStrb.append(tempLines.get(i));
+						
+						int rightPad = maxLength - tempLines.get(i).length();
+						while (rightPad > 0) {
+							wordStrb.append(" ");
+							rightPad--;
+						}
+						
+						tempLines.set(i, wordStrb.toString());
+						
+					}
+					
+				}
+			
+			}
+			
+			blockList.add(tempLines);
+			
+		}
+		
+		while (!blockList.isEmpty()) {
+			
+			ArrayList<ArrayList<String>> stagingList = new ArrayList<ArrayList<String>>(); 	//stage blocks to be printed in current line
+			
+			int maxHeight = blockList.get(0).size();
+			int spacesRemainingInLine = lineLength - blockList.get(0).get(0).length();
+			stagingList.add(blockList.get(0));
+			blockList.remove(0);
+			
+			while (!blockList.isEmpty() && spacesRemainingInLine - blockList.get(0).get(0).length() - spacesBetween >= 0) {
+				
+				if (blockList.get(0).size() > maxHeight) {
+					maxHeight = blockList.get(0).size();
+				}
+				
+				spacesRemainingInLine -= (blockList.get(0).get(0).length() + spacesBetween);
+				stagingList.add(blockList.get(0));
+				blockList.remove(0);
+
+			}
+			
+			for (ArrayList<String> block : stagingList) {
+				
+				int blockWidth = block.get(0).length();
+				
+				if (block.size() < maxHeight) {
+					
+					int totalPad = maxHeight - block.size();
+					int topPad = 0;
+					int bottomPad = 0;
+					
+					topPad = totalPad / 2;
+					bottomPad = totalPad - topPad;
+					
+					while (topPad > 0) {
+						block.add(0, String.format("%"+blockWidth+"s", ""));
+						topPad--;
+					}
+					
+					while (bottomPad > 0) {
+						block.add(String.format("%"+blockWidth+"s", ""));
+						bottomPad--;
+					}
+					
+				}
+				
+			}
+			
+			for (int i = 0; i < maxHeight; i++) { //add staged blocks to block line
+				strb.append(stagingList.get(0).get(i));
+				for (List<String> block : stagingList.subList(1, stagingList.size())) {
+					strb.append(" ").append(block.get(i));
+				}
+				strb.append("\n");
+			}
+			
+			strb.append("\n");
+			
+		}
+		
+		return strb.toString();
+		
+	}
+	
+	public static String alignStringBlocks(List<String> strings, int lineLength, int spacesBetween) {
+		return alignStringBlocks(strings, lineLength, spacesBetween, false);
+	}
+	
+	public static String alignStringBlocks(List<String> strings, int lineLength, boolean justifyCenter) {
+		return alignStringBlocks(strings, lineLength, 1, justifyCenter);
+	}
+	
+	public static String alignStringBlocks(List<String> strings, int lineLength) {
+		return alignStringBlocks(strings, lineLength, 1, false);
+	}
+	
+	public static String alignStringBlocks(List<String> strings, boolean justifyCenter) {
+		return alignStringBlocks(strings, Integer.MAX_VALUE, 1, justifyCenter);
+	}
+	
+	public static String alignStringBlocks(List<String> strings) {
+		return alignStringBlocks(strings, Integer.MAX_VALUE, 1, false);
 	}
 
 }
