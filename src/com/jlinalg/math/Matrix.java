@@ -53,6 +53,20 @@ public class Matrix {
 	}
 	
 	/**
+	 * Copy constructor for matrix object
+	 * @param matrix the matrix to be duplicated
+	 */
+	public Matrix(Matrix matrix) {
+		
+		this.rows = new ArrayList<ArrayList<Double>>();
+		
+		for (int i = 0; i < matrix.numRows(); i++) {
+			this.rows.add(matrix.getRow(i));
+		}
+		
+	}
+	
+	/**
 	 * Returns the number of rows in the matrix.
 	 * @return the number of rows in the matrix
 	 */
@@ -269,6 +283,41 @@ public class Matrix {
 			this.rows.get(r).set(col1, this.rows.get(r).get(col2));
 			this.rows.get(r).set(col2, temp);
 		}
+		
+	}
+	
+	/**
+	 * Returns an entrywise sum of this matrix with an equidimensional matrix
+	 * @param matrix the matrix to be added
+	 * @return a new matrix with entries summed
+	 * @throws IllegalArgumentException if the new matrix has different dimensions than this matrix
+	 */
+	public Matrix add(Matrix matrix) {
+		return sum(this, matrix);
+	}
+	
+	/**
+	 * Returns an entrywise sum of two equidimensional matrices
+	 * @param a
+	 * @param b
+	 * @return a new matrix with entries summed
+	 * @throws IllegalArgumentException if the matrices have different numbers of rows or columns
+	 */
+	public static Matrix sum(Matrix a, Matrix b) {
+		
+		if (a.numRows() != b.numRows() || a.numCols() != b.numCols()) {
+			throw new IllegalArgumentException("Matrices must be the same size.");
+		}
+		
+		Matrix sum = new Matrix(a.numRows(), b.numCols());
+		
+		for (int r = 1; r <= b.numRows(); r++) {
+			for (int c = 1; c <= b.numCols(); c++) {
+				sum.setEntry(r, c, NumberUtils.fixRoundingError(a.getEntry(r, c) + b.getEntry(r, c)));
+			}
+		}
+		
+		return sum;
 		
 	}
 	

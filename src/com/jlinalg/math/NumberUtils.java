@@ -20,4 +20,8 @@ public class NumberUtils {
 		return randomDouble(Double.MIN_VALUE, Double.MAX_VALUE);
 	}
 	
+	public static double fixRoundingError(double d) { //NOTE: Untested for high levels of precision
+		return (double) Math.round(d * 100000) / 100000;
+	}
+	
 }

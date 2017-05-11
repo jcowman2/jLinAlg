@@ -1,26 +1,31 @@
 package testing;
 
+import java.util.ArrayList;
+
+import com.jlinalg.graphic.Printer;
 import com.jlinalg.math.*;
 
 public class MatrixBehaviorTest {
 	
 	public static void test() {
 		
-		testDefaultConstruction();
+		//testDefaultConstruction();
 		
-		testSettingDiagonal();
+		//testSettingDiagonal();
 		
-		testIdentity();
+		//testIdentity();
 		
-		testRowSwapping();
+		//testRowSwapping();
 		
-		testColumnSwapping();
+		//testColumnSwapping();
 		
-		testRowFill();
+		//testRowFill();
 		
-		testColumnFill();
+		//testColumnFill();
 		
-		testGenerateRandom();
+		//testGenerateRandom();
+		
+		testAdd();
 		
 	}
 	
@@ -132,6 +137,52 @@ public class MatrixBehaviorTest {
 		
 		m = MatrixGenerator.generateRandom(5, 5, -5, 5, 1);
 		System.out.println(m);
+		
+	}
+	
+	public static void testAdd() {
+		
+		System.out.println("\n~Testing adding several random matrices");
+		
+		System.out.println("-> Test 1");
+		
+		int r = NumberUtils.randomInt(2, 6);
+		int c = NumberUtils.randomInt(2, 6);
+		
+		Matrix m1 = MatrixGenerator.generateRandom(r, c, -5, 10, 1);
+		Matrix m2 = MatrixGenerator.generateRandom(r, c, -5, 10, 1);
+		Matrix m3 = Matrix.sum(m1, m2);
+		
+		ArrayList<String> addList = new ArrayList<String>();
+		addList.add(m1.toString());
+		addList.add("+");
+		addList.add(m2.toString());
+		addList.add("=");
+		addList.add(m3.toString());
+		
+		System.out.println(Printer.alignStringBlocks(addList));
+		
+		System.out.println("-> Test 2");
+		
+		ArrayList<Matrix> matrixList = new ArrayList<Matrix>();
+		ArrayList<String> stringList = new ArrayList<String>();
+		
+		Matrix startMatrix = MatrixGenerator.generateRandom(3, 3, -5, 10, 1);
+		matrixList.add(startMatrix);
+		stringList.add(startMatrix.toString());
+		
+		for (int i = 0; i < 3; i++) {
+			Matrix m = MatrixGenerator.generateRandom(3, 3, -5, 10, 1);
+			startMatrix = startMatrix.add(m);
+			matrixList.add(m);
+			stringList.add("+");
+			stringList.add(m.toString());
+		}
+		
+		stringList.add("=");
+		stringList.add(startMatrix.toString());
+		
+		System.out.println(Printer.alignStringBlocks(stringList));
 		
 	}
 
