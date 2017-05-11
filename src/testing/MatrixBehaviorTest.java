@@ -1,6 +1,7 @@
 package testing;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.jlinalg.graphic.Printer;
 import com.jlinalg.math.*;
@@ -26,6 +27,8 @@ public class MatrixBehaviorTest {
 		//testGenerateRandom();
 		
 		testAdd();
+		
+		testScalarMultiply();
 		
 	}
 	
@@ -184,6 +187,17 @@ public class MatrixBehaviorTest {
 		
 		System.out.println(Printer.alignStringBlocks(stringList));
 		
+	}
+	
+	public static void testScalarMultiply() {
+		
+		System.out.println("\n~Testing multiplying a matrix by a scalar");
+		
+		Matrix m = MatrixGenerator.generateRandom(4, 4, -5, 10);
+		int scalar = NumberUtils.randomInt(-5, 10);
+		String strs[] = {Integer.toString(scalar), m.toString(), " = ", m.scalarMultiply(scalar).toString()};
+		
+		System.out.println(Printer.alignStringBlocks(new ArrayList<String>(Arrays.asList(strs)), Integer.MAX_VALUE, 0));
 	}
 
 }

@@ -321,6 +321,23 @@ public class Matrix {
 		
 	}
 	
+	/**
+	 * Multiplies this matrix by a real scalar
+	 * @param scalar
+	 * @return this matrix
+	 */
+	public Matrix scalarMultiply(double scalar) {
+		
+		for (int r = 1; r <= this.numRows(); r++) {
+			for (int c = 1; c <= this.numCols(); c++) {
+				this.setEntry(r, c, NumberUtils.fixRoundingError(this.getEntry(r, c) * scalar));
+			}
+		}
+		
+		return this;
+		
+	}
+	
 	public String toString() {
 		return Printer.matrixToString(this);
 	}
