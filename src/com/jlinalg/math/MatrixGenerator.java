@@ -1,7 +1,5 @@
 package com.jlinalg.math;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class MatrixGenerator {
 	
 	public static Matrix generateIdentity(int size) {
@@ -37,7 +35,7 @@ public class MatrixGenerator {
 		for (int r = 1; r <= rows; r++) {
 			for (int c = 1; c <= cols; c++) {
 				
-				value = ThreadLocalRandom.current().nextDouble(min, max);
+				value = NumberUtils.randomDouble(min, max);
 				value = Double.valueOf(String.format("%." + precision + "f", value));  //Set precision
 				
 				m.setEntry(r, c, value);

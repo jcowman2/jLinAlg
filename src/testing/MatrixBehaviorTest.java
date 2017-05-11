@@ -1,7 +1,6 @@
 package testing;
 
 import com.jlinalg.math.*;
-import com.jlinalg.graphic.*;
 
 public class MatrixBehaviorTest {
 	

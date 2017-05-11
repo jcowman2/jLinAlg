@@ -1,9 +1,8 @@
 package testing;
 
-import com.jlinalg.math.*;
-
 import java.util.ArrayList;
 
+import com.jlinalg.math.*;
 import com.jlinalg.graphic.*;
 
 public class VisualTest {
@@ -73,6 +72,15 @@ public class VisualTest {
 		ms.add(m3.toString());
 		
 		System.out.println(Printer.alignStringBlocks(ms));
+		System.out.println("-> 15 randomized matrices, string length 100\n");
+		
+		ArrayList<String> matrixStrings = new ArrayList<String>();
+		for (int i = 1; i <= 15; i++) {
+			matrixStrings.add(MatrixGenerator.generateRandom(NumberUtils.randomInt(1, 5), 
+					NumberUtils.randomInt(1, 5), -5, 10, 1).toString());
+		}
+		
+		System.out.println(Printer.alignStringBlocks(matrixStrings, 100));
 		
 	}
 	
