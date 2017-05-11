@@ -1,7 +1,10 @@
 package testing;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.jlinalg.graphic.Printer;
 import com.jlinalg.math.*;
-import com.jlinalg.graphic.*;
 
 public class MatrixBehaviorTest {
 	
@@ -22,6 +25,10 @@ public class MatrixBehaviorTest {
 		testColumnFill();
 		
 		testGenerateRandom();
+		
+		testAdd();
+		
+		testScalarMultiply();
 		
 	}
 	
@@ -58,8 +65,7 @@ public class MatrixBehaviorTest {
 		System.out.println("\n~Testing row swapping in a matrix");
 		
 		Matrix m = new Matrix(3,4);
-		m.setDiagonal(131);
-		m.setEntry(1, 2, -67);
+		m.setDiagonal(131).setEntry(1, 2, -67);
 		
 		System.out.println(m);
 		
@@ -76,16 +82,13 @@ public class MatrixBehaviorTest {
 		Matrix m = new Matrix(2,5);
 		
 		for (int i = 1; i <= 5; i++) {
-			m.setEntry(1, i, i);
-			m.setEntry(2, i, -1 * i);
+			m.setEntry(1, i, i).setEntry(2, i, -1 * i);
 		}
 		
 		System.out.println(m);
 		
 		System.out.println("-> Swapping columns 1 and 5, 2 and 4, 5 and 3\n");
-		m.swapColumns(1, 5);
-		m.swapColumns(2, 4);
-		m.swapColumns(5, 3);
+		m.swapColumns(1, 5).swapColumns(2, 4).swapColumns(5, 3);
 		
 		System.out.println(m);
 		
@@ -96,8 +99,7 @@ public class MatrixBehaviorTest {
 		System.out.println("\n~Testing filling a row of a matrix");
 		
 		Matrix m = MatrixGenerator.generateIdentity(6);
-		m.fillRow(2, 43);
-		m.fillRow(6, -789);
+		m.fillRow(2, 43).fillRow(6, -789);
 		
 		System.out.println(m);
 		
@@ -108,8 +110,7 @@ public class MatrixBehaviorTest {
 		System.out.println("\n~Testing filling a column of a matrix");
 		
 		Matrix m = new Matrix(9, 4, -1);
-		m.fillColumn(1, 0);
-		m.fillColumn(3, 0);
+		m.fillColumn(1, 0).fillColumn(3, 0);
 		
 		System.out.println(m);
 		
@@ -134,6 +135,63 @@ public class MatrixBehaviorTest {
 		m = MatrixGenerator.generateRandom(5, 5, -5, 5, 1);
 		System.out.println(m);
 		
+	}
+	
+	public static void testAdd() {
+		
+		System.out.println("\n~Testing adding several random matrices");
+		
+		System.out.println("-> Test 1");
+		
+		int r = NumberUtils.randomInt(2, 6);
+		int c = NumberUtils.randomInt(2, 6);
+		
+		Matrix m1 = MatrixGenerator.generateRandom(r, c, -5, 10, 1);
+		Matrix m2 = MatrixGenerator.generateRandom(r, c, -5, 10, 1);
+		Matrix m3 = Matrix.sum(m1, m2);
+		
+		ArrayList<String> addList = new ArrayList<String>();
+		addList.add(m1.toString());
+		addList.add("+");
+		addList.add(m2.toString());
+		addList.add("=");
+		addList.add(m3.toString());
+		
+		System.out.println(Printer.alignStringBlocks(addList));
+		
+		System.out.println("-> Test 2");
+		
+		ArrayList<Matrix> matrixList = new ArrayList<Matrix>();
+		ArrayList<String> stringList = new ArrayList<String>();
+		
+		Matrix startMatrix = MatrixGenerator.generateRandom(3, 3, -5, 10, 1);
+		matrixList.add(startMatrix);
+		stringList.add(startMatrix.toString());
+		
+		for (int i = 0; i < 3; i++) {
+			Matrix m = MatrixGenerator.generateRandom(3, 3, -5, 10, 1);
+			startMatrix = startMatrix.add(m);
+			matrixList.add(m);
+			stringList.add("+");
+			stringList.add(m.toString());
+		}
+		
+		stringList.add("=");
+		stringList.add(startMatrix.toString());
+		
+		System.out.println(Printer.alignStringBlocks(stringList));
+		
+	}
+	
+	public static void testScalarMultiply() {
+		
+		System.out.println("\n~Testing multiplying a matrix by a scalar");
+		
+		Matrix m = MatrixGenerator.generateRandom(4, 4, -5, 10);
+		int scalar = NumberUtils.randomInt(-5, 10);
+		String strs[] = {Integer.toString(scalar), m.toString(), " = ", m.scalarMultiply(scalar).toString()};
+		
+		System.out.println(Printer.alignStringBlocks(new ArrayList<String>(Arrays.asList(strs)), Integer.MAX_VALUE, 0));
 	}
 
 }

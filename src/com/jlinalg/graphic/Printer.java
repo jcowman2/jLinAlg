@@ -220,11 +220,18 @@ public class Printer {
 			}
 			
 			for (int i = 0; i < maxHeight; i++) { //add staged blocks to block line
+				
 				strb.append(stagingList.get(0).get(i));
+				
 				for (List<String> block : stagingList.subList(1, stagingList.size())) {
-					strb.append(" ").append(block.get(i));
+					for (int s = 1; s <= spacesBetween; s++) {
+						strb.append(" ");
+					}
+					strb.append(block.get(i));
 				}
+				
 				strb.append("\n");
+				
 			}
 			
 			strb.append("\n");

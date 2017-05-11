@@ -53,6 +53,20 @@ public class Matrix {
 	}
 	
 	/**
+	 * Copy constructor for matrix object
+	 * @param matrix the matrix to be duplicated
+	 */
+	public Matrix(Matrix matrix) {
+		
+		this.rows = new ArrayList<ArrayList<Double>>();
+		
+		for (int i = 0; i < matrix.numRows(); i++) {
+			this.rows.add(matrix.getRow(i));
+		}
+		
+	}
+	
+	/**
 	 * Returns the number of rows in the matrix.
 	 * @return the number of rows in the matrix
 	 */
@@ -73,11 +87,11 @@ public class Matrix {
 	 * @param row row at which the entry is to changed
 	 * @param col column at which the entry is to changed
 	 * @param value number to which the entry is changed
-	 * @return the value of the updated entry
+	 * @return this matrix
 	 * @throws IllegalArgumentException if <code>row</code> or <code>col</code> are outside
 	 * the dimensions of the matrix.
 	 */
-	public double setEntry(int row, int col, double value) {
+	public Matrix setEntry(int row, int col, double value) {
 		
 		if (row < 1 || row > this.numRows()) {
 			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row));
@@ -88,7 +102,9 @@ public class Matrix {
 		}
 		
 		this.rows.get(row-1).set(col-1, value);
-		return value;
+		
+		return this;
+		
 	}
 	
 	/**
@@ -110,6 +126,7 @@ public class Matrix {
 		}
 		
 		return this.rows.get(row-1).get(col-1);
+		
 	}
 	
 	/**
@@ -125,16 +142,17 @@ public class Matrix {
 		}
 		
 		return new ArrayList<Double>(this.rows.get(row-1));
+		
 	}
 	
 	/**
 	 * Changes every element in a row of the matrix to the given value
 	 * @param row
 	 * @param value
-	 * @return the new value of every element in the modified row
+	 * @return this matrix
 	 * @throws IllegalArgumentException if <code>row</code> is outside the dimension of the matrix.
 	 */
-	public double fillRow(int row, double value) {
+	public Matrix fillRow(int row, double value) {
 		
 		if (row < 1 || row > this.numRows()) {
 			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row));
@@ -146,7 +164,7 @@ public class Matrix {
 			this.rows.get(row).set(i, value);
 		}
 		
-		return value;
+		return this;
 	}
 	
 	/**
@@ -175,10 +193,10 @@ public class Matrix {
 	 * Changes every element in a column of the matrix to the given value
 	 * @param col
 	 * @param value
-	 * @return the new value of every element in the modified column
+	 * @return this matrix
 	 * @throws IllegalArgumentException if <code>col</code> is outside the dimension of the matrix.
 	 */
-	public double fillColumn(int col, double value) {
+	public Matrix fillColumn(int col, double value) {
 		
 		if (col < 1 || col > this.numCols()) {
 			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col));
@@ -190,35 +208,37 @@ public class Matrix {
 			this.rows.get(i).set(col, value);
 		}
 		
-		return value;
+		return this;
+		
 	}
 	
 	/**
 	 * Sets the value of every element in the main diagonal of the matrix.
 	 * @param value number to which each element in the main diagonal is changed
-	 * @return the new value of each element in the diagonal
+	 * @return this matrix
 	 */
-	public double setDiagonal(double value) {
+	public Matrix setDiagonal(double value) {
 		int rows = this.numRows();
 		int cols = this.numCols();
 		
 		for (int r = 0; r < rows; r++) {
 			if (r >= cols) {
-				return value;
+				return this;
 			}
 			this.rows.get(r).set(r, value);
 		}
 		
-		return value;
+		return this;
 	}
 	
 	/**
 	 * Swaps two rows in the matrix.
 	 * @param row1 
 	 * @param row2
+	 * @return this matrix
 	 * @throws IllegalArgumentException if either row is outside the dimension of the matrix.
 	 */
-	public void swapRows(int row1, int row2) {
+	public Matrix swapRows(int row1, int row2) {
 		
 		if (row1 < 1 || row1 > this.numRows()) {
 			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row1));
@@ -229,7 +249,7 @@ public class Matrix {
 		}
 		
 		if (row1 == row2) {
-			return;
+			return this;
 		}
 		
 		row1--;
@@ -239,15 +259,18 @@ public class Matrix {
 		this.rows.set(row1, this.rows.get(row2));
 		this.rows.set(row2, tempRow);
 		
+		return this;
+		
 	}
 	
 	/**
 	 * Swaps two columns in a matrix.
 	 * @param col1
 	 * @param col2
+	 * @return this matrix
 	 * @throws IllegalArgumentException if either column is outside the dimension of the matrix.
 	 */
-	public void swapColumns(int col1, int col2) {
+	public Matrix swapColumns(int col1, int col2) {
 		
 		if (col1 < 1 || col1 > this.numCols()) {
 			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col1));
@@ -258,7 +281,7 @@ public class Matrix {
 		}
 		
 		if (col1 == col2) {
-			return;
+			return this;
 		}
 		
 		col1--;
@@ -270,7 +293,62 @@ public class Matrix {
 			this.rows.get(r).set(col2, temp);
 		}
 		
+		return this;
+		
 	}
+	
+	/**
+	 * Returns an entrywise sum of this matrix with an equidimensional matrix
+	 * @param matrix the matrix to be added
+	 * @return a new matrix with entries summed
+	 * @throws IllegalArgumentException if the new matrix has different dimensions than this matrix
+	 */
+	public Matrix add(Matrix matrix) {
+		return sum(this, matrix);
+	}
+	
+	/**
+	 * Returns an entrywise sum of two equidimensional matrices
+	 * @param a
+	 * @param b
+	 * @return a new matrix with entries summed
+	 * @throws IllegalArgumentException if the matrices have different numbers of rows or columns
+	 */
+	public static Matrix sum(Matrix a, Matrix b) {
+		
+		if (a.numRows() != b.numRows() || a.numCols() != b.numCols()) {
+			throw new IllegalArgumentException("Matrices must be the same size.");
+		}
+		
+		Matrix sum = new Matrix(a.numRows(), b.numCols());
+		
+		for (int r = 1; r <= b.numRows(); r++) {
+			for (int c = 1; c <= b.numCols(); c++) {
+				sum.setEntry(r, c, NumberUtils.fixRoundingError(a.getEntry(r, c) + b.getEntry(r, c)));
+			}
+		}
+		
+		return sum;
+		
+	}
+	
+	/**
+	 * Multiplies this matrix by a real scalar
+	 * @param scalar
+	 * @return this matrix
+	 */
+	public Matrix scalarMultiply(double scalar) {
+		
+		for (int r = 1; r <= this.numRows(); r++) {
+			for (int c = 1; c <= this.numCols(); c++) {
+				this.setEntry(r, c, NumberUtils.fixRoundingError(this.getEntry(r, c) * scalar));
+			}
+		}
+		
+		return this;
+		
+	}
+	
 	
 	public String toString() {
 		return Printer.matrixToString(this);
