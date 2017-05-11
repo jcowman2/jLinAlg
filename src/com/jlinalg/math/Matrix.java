@@ -87,11 +87,11 @@ public class Matrix {
 	 * @param row row at which the entry is to changed
 	 * @param col column at which the entry is to changed
 	 * @param value number to which the entry is changed
-	 * @return the value of the updated entry
+	 * @return this matrix
 	 * @throws IllegalArgumentException if <code>row</code> or <code>col</code> are outside
 	 * the dimensions of the matrix.
 	 */
-	public double setEntry(int row, int col, double value) {
+	public Matrix setEntry(int row, int col, double value) {
 		
 		if (row < 1 || row > this.numRows()) {
 			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row));
@@ -102,7 +102,9 @@ public class Matrix {
 		}
 		
 		this.rows.get(row-1).set(col-1, value);
-		return value;
+		
+		return this;
+		
 	}
 	
 	/**
@@ -124,6 +126,7 @@ public class Matrix {
 		}
 		
 		return this.rows.get(row-1).get(col-1);
+		
 	}
 	
 	/**
@@ -139,16 +142,17 @@ public class Matrix {
 		}
 		
 		return new ArrayList<Double>(this.rows.get(row-1));
+		
 	}
 	
 	/**
 	 * Changes every element in a row of the matrix to the given value
 	 * @param row
 	 * @param value
-	 * @return the new value of every element in the modified row
+	 * @return this matrix
 	 * @throws IllegalArgumentException if <code>row</code> is outside the dimension of the matrix.
 	 */
-	public double fillRow(int row, double value) {
+	public Matrix fillRow(int row, double value) {
 		
 		if (row < 1 || row > this.numRows()) {
 			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row));
@@ -160,7 +164,7 @@ public class Matrix {
 			this.rows.get(row).set(i, value);
 		}
 		
-		return value;
+		return this;
 	}
 	
 	/**
@@ -189,10 +193,10 @@ public class Matrix {
 	 * Changes every element in a column of the matrix to the given value
 	 * @param col
 	 * @param value
-	 * @return the new value of every element in the modified column
+	 * @return this matrix
 	 * @throws IllegalArgumentException if <code>col</code> is outside the dimension of the matrix.
 	 */
-	public double fillColumn(int col, double value) {
+	public Matrix fillColumn(int col, double value) {
 		
 		if (col < 1 || col > this.numCols()) {
 			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col));
@@ -204,35 +208,37 @@ public class Matrix {
 			this.rows.get(i).set(col, value);
 		}
 		
-		return value;
+		return this;
+		
 	}
 	
 	/**
 	 * Sets the value of every element in the main diagonal of the matrix.
 	 * @param value number to which each element in the main diagonal is changed
-	 * @return the new value of each element in the diagonal
+	 * @return this matrix
 	 */
-	public double setDiagonal(double value) {
+	public Matrix setDiagonal(double value) {
 		int rows = this.numRows();
 		int cols = this.numCols();
 		
 		for (int r = 0; r < rows; r++) {
 			if (r >= cols) {
-				return value;
+				return this;
 			}
 			this.rows.get(r).set(r, value);
 		}
 		
-		return value;
+		return this;
 	}
 	
 	/**
 	 * Swaps two rows in the matrix.
 	 * @param row1 
 	 * @param row2
+	 * @return this matrix
 	 * @throws IllegalArgumentException if either row is outside the dimension of the matrix.
 	 */
-	public void swapRows(int row1, int row2) {
+	public Matrix swapRows(int row1, int row2) {
 		
 		if (row1 < 1 || row1 > this.numRows()) {
 			throw new IllegalArgumentException("Invalid row parameter: " + String.valueOf(row1));
@@ -243,7 +249,7 @@ public class Matrix {
 		}
 		
 		if (row1 == row2) {
-			return;
+			return this;
 		}
 		
 		row1--;
@@ -253,15 +259,18 @@ public class Matrix {
 		this.rows.set(row1, this.rows.get(row2));
 		this.rows.set(row2, tempRow);
 		
+		return this;
+		
 	}
 	
 	/**
 	 * Swaps two columns in a matrix.
 	 * @param col1
 	 * @param col2
+	 * @return this matrix
 	 * @throws IllegalArgumentException if either column is outside the dimension of the matrix.
 	 */
-	public void swapColumns(int col1, int col2) {
+	public Matrix swapColumns(int col1, int col2) {
 		
 		if (col1 < 1 || col1 > this.numCols()) {
 			throw new IllegalArgumentException("Invalid column parameter: " + String.valueOf(col1));
@@ -272,7 +281,7 @@ public class Matrix {
 		}
 		
 		if (col1 == col2) {
-			return;
+			return this;
 		}
 		
 		col1--;
@@ -283,6 +292,8 @@ public class Matrix {
 			this.rows.get(r).set(col1, this.rows.get(r).get(col2));
 			this.rows.get(r).set(col2, temp);
 		}
+		
+		return this;
 		
 	}
 	
@@ -337,6 +348,7 @@ public class Matrix {
 		return this;
 		
 	}
+	
 	
 	public String toString() {
 		return Printer.matrixToString(this);
