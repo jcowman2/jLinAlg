@@ -11,6 +11,16 @@ public class Expression implements PolyBehavior{
 	}
 	
 	public Expression add(int i) {
+		
+		PolyTerm term = new PolyTerm(new PolyConstant(i));
+		
+		for (PolyTerm t : this.terms) {
+			if (t.isLikeTerm(term)) {
+				t.add(term);
+				return this;
+			}
+		}
+		
 		terms.add(new PolyTerm(new PolyConstant(i)));
 		return this;
 	}

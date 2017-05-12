@@ -17,6 +17,18 @@ public class PolyTerm implements PolyBehavior {
 		exponents.add(PolyConstant.ONE);
 	}
 	
+	public PolyTerm add(PolyTerm t) {
+		
+		if (!this.isLikeTerm(t)) {
+			throw new IllegalArgumentException("Unlike terms");
+		}
+		
+		//TODO
+		
+		return this;
+		
+	}
+	
 	public boolean isLikeTerm(PolyBehavior p) {
 		
 		if (!p.getClass().equals(this.getClass())) {
