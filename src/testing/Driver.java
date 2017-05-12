@@ -4,9 +4,11 @@ public class Driver {
 	
 	public static void main(String[] args) {
 		
-		MatrixBehaviorTest.test();
+		//MatrixBehaviorTest.test();
 		
-		VisualTest.test();
+		//VisualTest.test();
+		
+		PolynomialTest.test();
 		
 	}
 	
