@@ -299,12 +299,12 @@ public class Matrix {
 	
 	/**
 	 * Returns an entrywise sum of this matrix with an equidimensional matrix
-	 * @param matrix the matrix to be added
+	 * @param matrix the matrix to be added to this matrix
 	 * @return a new matrix with entries summed
 	 * @throws IllegalArgumentException if the new matrix has different dimensions than this matrix
 	 */
 	public Matrix add(Matrix matrix) {
-		return sum(this, matrix);
+		return Matrix.sum(this, matrix);
 	}
 	
 	/**
@@ -349,6 +349,58 @@ public class Matrix {
 		
 	}
 	
+	/**
+	 * Multiplies two matrices using an iterative algorithm
+	 * @param a an n x m matrix
+	 * @param b an m x p matrix
+	 * @return resulting n x p matrix
+	 * @throws IllegalArgumentException if the the number of columns in the first matrix doesn't match the number of rows in the second matrix
+	 */
+	public static Matrix multiply(Matrix a, Matrix b) {
+		
+		if (a.numCols() != b.numRows()) {
+			throw new IllegalArgumentException("Number of columns in first matrix must match number of rows in second matrix.");
+		}
+		
+		Matrix m = new Matrix(a.numRows(), b.numCols());
+		
+		for (int r = 1; r <= m.numRows(); r++) {
+			for (int c = 1; c <= m.numCols(); c++) {
+				
+				int sum = 0;
+				
+				for (int i = 1; i <= a.numCols(); i++) {
+					sum += a.getEntry(r, i) * b.getEntry(i, c);
+				}
+				
+				m.setEntry(r, c, NumberUtils.fixRoundingError(sum));
+				
+			}
+		}
+		
+		return m;
+		
+	}
+	
+	/**
+	 * Multiplies this n x m matrix with another m x p matrix, using an iterative algorithm
+	 * @param matrix
+	 * @return resulting n x p matrix
+	 * @throws IllegalArgumentException if the the number of columns in this matrix doesn't match the number of rows in the second matrix
+	 */
+	public Matrix multiply(Matrix matrix) {
+		return Matrix.multiply(this, matrix);
+	}
+	
+	/**
+	 * Multiplies another n x m matrix with this m x p matrix, using an iterative algorithm
+	 * @param matrix
+	 * @return resulting n x p matrix
+	 * @throws IllegalArgumentException if the the number of columns in the other matrix doesn't match the number of rows in this matrix
+	 */
+	public Matrix multiplyLeft(Matrix matrix) {
+		return Matrix.multiply(matrix, this);
+	}
 	
 	public String toString() {
 		return Printer.matrixToString(this);

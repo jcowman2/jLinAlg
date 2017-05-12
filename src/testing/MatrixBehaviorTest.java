@@ -10,25 +10,27 @@ public class MatrixBehaviorTest {
 	
 	public static void test() {
 		
-		testDefaultConstruction();
+		//testDefaultConstruction();
 		
-		testSettingDiagonal();
+		//testSettingDiagonal();
 		
-		testIdentity();
+		//testIdentity();
 		
-		testRowSwapping();
+		//testRowSwapping();
 		
-		testColumnSwapping();
+		//testColumnSwapping();
 		
-		testRowFill();
+		//testRowFill();
 		
-		testColumnFill();
+		//testColumnFill();
 		
-		testGenerateRandom();
+		//testGenerateRandom();
 		
-		testAdd();
+		//testAdd();
 		
-		testScalarMultiply();
+		//testScalarMultiply();
+		
+		testMultiply();
 		
 	}
 	
@@ -192,6 +194,30 @@ public class MatrixBehaviorTest {
 		String strs[] = {Integer.toString(scalar), m.toString(), " = ", m.scalarMultiply(scalar).toString()};
 		
 		System.out.println(Printer.alignStringBlocks(new ArrayList<String>(Arrays.asList(strs)), Integer.MAX_VALUE, 0));
+		
+	}
+	
+	public static void testMultiply() {
+		
+		System.out.println("\n~Testing multiplying matrices");
+		
+		System.out.println("-> Test 1");
+		
+		Matrix m1 = MatrixGenerator.generateRandom(NumberUtils.randomInt(2, 5), NumberUtils.randomInt(2, 5), -10, 10);
+		Matrix m2 = MatrixGenerator.generateRandom(m1.numCols(), NumberUtils.randomInt(2, 5), -10, 10);
+		String strs[] = {m1.toString(), m2.toString(), " = ", Matrix.multiply(m1,m2).toString()};
+		
+		System.out.println(Printer.alignStringBlocks(new ArrayList<String>(Arrays.asList(strs)), Integer.MAX_VALUE, 0));
+		
+		System.out.println("-> Test 2");
+		
+		m1 = MatrixGenerator.generateRandom(2, 2, -10, 10);
+		m2 = MatrixGenerator.generateRandom(2, 2, -10, 10);
+		Matrix m3 = MatrixGenerator.generateRandom(2, 2, -10, 10);
+		String strs2[] = {m1.toString(), m2.toString(), m3.toString(), " = ", m2.multiplyLeft(m1).multiply(m3).toString()};
+		
+		System.out.println(Printer.alignStringBlocks(new ArrayList<String>(Arrays.asList(strs2)), Integer.MAX_VALUE, 0));
+		
 	}
 
 }
