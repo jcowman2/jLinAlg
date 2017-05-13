@@ -24,11 +24,11 @@ public class MatrixBehaviorTest {
 		
 		//testColumnFill();
 		
-		//testGenerateRandom();
+		testGenerateRandom();
 		
-		//testAdd();
+		testAdd();
 		
-		//testScalarMultiply();
+		testScalarMultiply();
 		
 		testMultiply();
 		

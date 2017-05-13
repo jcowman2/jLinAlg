@@ -15,7 +15,7 @@ public class VisualTest {
 		
 		//testCenterString();
 		
-		//testAlignStringBlocks();
+		testAlignStringBlocks();
 		
 	}
 	
