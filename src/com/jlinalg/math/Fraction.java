@@ -31,7 +31,7 @@ public class Fraction implements MatrixElement {
 			throw new IllegalMatrixOperationException("Cannot add " + this.getClass().toString() + " and " + e.getClass().toString());
 		}
 		
-		return null;
+		return this;
 		
 	}
 
