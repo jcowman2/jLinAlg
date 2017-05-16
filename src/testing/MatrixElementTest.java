@@ -12,6 +12,8 @@ public class MatrixElementTest {
 		
 		testInvalidConstruction();
 		
+		testAddition();
+		
 	}
 	
 	public static void testConstruction() {
@@ -35,6 +37,25 @@ public class MatrixElementTest {
 			System.out.println(e.getMessage());
 		}
 		
+	}
+	
+	public static void testAddition() {
+		
+		System.out.println("\n~Testing addition");
+		
+		Fraction fracs[] = new Fraction[4];
+		
+		for (int i = 0; i < 4; i++) {
+			int d = NumberUtils.randomInt(-100, 100);
+			d = (d == 0) ? d + 1 : d;
+			fracs[i] = new Fraction(NumberUtils.randomInt(-100,100), d);
+		}
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = i; j < 4; j++) {
+				System.out.println(fracs[i].toString() + " + " + fracs[j].toString() + " = " + fracs[i].add(fracs[j]).toString());
+			}
+		}
 	}
 
 

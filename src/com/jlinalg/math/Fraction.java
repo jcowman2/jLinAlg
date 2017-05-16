@@ -45,9 +45,10 @@ public class Fraction implements MatrixElement<Fraction> {
 	@Override
 	public Fraction add(Fraction e) {
 		
-		Fraction f;
+		BigInteger newNum = this.numerator.multiply(e.getDenominator()).add(e.getNumerator().multiply(this.denominator));
+		BigInteger newDenom = this.denominator.multiply(e.getDenominator());
 		
-		return this;
+		return new Fraction(newNum, newDenom);
 		
 	}
 	
@@ -63,6 +64,5 @@ public class Fraction implements MatrixElement<Fraction> {
 		}
 		
 	}
-
 
 }

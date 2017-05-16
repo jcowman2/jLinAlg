@@ -1,9 +1,9 @@
 package com.jlinalg.math;
 
-public class Dummy implements MatrixElement {
+public class Dummy implements MatrixElement<Dummy> {
 
 	@Override
-	public MatrixElement add(MatrixElement e) {
+	public Dummy add(Dummy e) {
 		// TODO Auto-generated method stub
 		return null;
 	}
