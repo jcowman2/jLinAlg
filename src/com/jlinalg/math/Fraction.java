@@ -2,7 +2,7 @@ package com.jlinalg.math;
 
 import java.math.BigInteger;
 
-public class Fraction implements MatrixElement {
+public class Fraction implements MatrixElement<Fraction> {
 	
 	private BigInteger numerator;
 	private BigInteger denominator;
@@ -21,15 +21,9 @@ public class Fraction implements MatrixElement {
 	}
 	
 	@Override
-	public Fraction add(MatrixElement e) {
+	public Fraction add(Fraction e) {
 		
 		Fraction f;
-		
-		try {
-			f = (Fraction) e;
-		} catch (ClassCastException cce) {
-			throw new IllegalMatrixOperationException("Cannot add " + this.getClass().toString() + " and " + e.getClass().toString());
-		}
 		
 		return this;
 		

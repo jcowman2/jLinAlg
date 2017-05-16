@@ -1,7 +1,7 @@
 package com.jlinalg.math;
 
-public interface MatrixElement {
+public interface MatrixElement<T extends MatrixElement> {
 	
-	public MatrixElement add(MatrixElement e);
+	public T add(T e);
 
 }
