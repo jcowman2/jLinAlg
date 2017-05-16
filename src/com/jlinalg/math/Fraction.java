@@ -7,9 +7,19 @@ public class Fraction implements MatrixElement<Fraction> {
 	private BigInteger numerator;
 	private BigInteger denominator;
 	
+	public Fraction(BigInteger num, BigInteger denom) {
+		
+		if (denom.compareTo(BigInteger.ZERO) == 0) {
+			throw new ArithmeticException("Cannot divide by zero");
+		}
+		
+		this.numerator = num;
+		this.denominator = denom;
+		
+	}
+	
 	public Fraction(int num, int denom) {
-		numerator = BigInteger.valueOf(num);
-		denominator = BigInteger.valueOf(denom);
+		this(BigInteger.valueOf(num), BigInteger.valueOf(denom));
 	}
 	
 	public Fraction(int num) {
@@ -18,6 +28,18 @@ public class Fraction implements MatrixElement<Fraction> {
 	
 	public Fraction() {
 		this(0, 1);
+	}
+	
+	public Fraction(Fraction f) {
+		this(f.getNumerator(), f.getDenominator());
+	}
+	
+	public BigInteger getNumerator() {
+		return this.numerator;
+	}
+	
+	public BigInteger getDenominator() {
+		return this.denominator;
 	}
 	
 	@Override
