@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 import com.jlinalg.math.*;
 
-public class MatrixElementTest {
+public class FractionTest {
 
 	public static void test() {
 		
@@ -13,6 +13,8 @@ public class MatrixElementTest {
 		testInvalidConstruction();
 		
 		testAddition();
+		
+		testMultiplication();
 		
 	}
 	
@@ -54,6 +56,25 @@ public class MatrixElementTest {
 		for (int i = 0; i < 4; i++) {
 			for (int j = i; j < 4; j++) {
 				System.out.println(fracs[i].toString() + " + " + fracs[j].toString() + " = " + fracs[i].add(fracs[j]).toString());
+			}
+		}
+	}
+	
+	public static void testMultiplication() {
+		
+		System.out.println("\n~Testing multiplication");
+		
+		Fraction fracs[] = new Fraction[4];
+		
+		for (int i = 0; i < 4; i++) {
+			int d = NumberUtils.randomInt(-20, 20);
+			d = (d == 0) ? d + 1 : d;
+			fracs[i] = new Fraction(NumberUtils.randomInt(-1 * Math.abs(d),Math.abs(d)), d);
+		}
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = i; j < 4; j++) {
+				System.out.println(fracs[i].toString() + " * " + fracs[j].toString() + " = " + fracs[i].multiply(fracs[j]).toString());
 			}
 		}
 	}

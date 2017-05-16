@@ -68,6 +68,11 @@ public class Fraction implements MatrixElement<Fraction> {
 	}
 	
 	@Override
+	public Fraction multiply(Fraction e) {
+		return new Fraction(this.numerator.multiply(e.getNumerator()), this.denominator.multiply(e.getDenominator()));
+	}
+	
+	@Override
 	public String toString() {
 		
 		if (numerator.intValue() == 0) {

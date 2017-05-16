@@ -8,7 +8,7 @@ public class Driver {
 		
 		//VisualTest.test();
 		
-		MatrixElementTest.test();
+		FractionTest.test();
 		
 	}
 	
