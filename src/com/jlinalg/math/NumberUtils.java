@@ -24,4 +24,8 @@ public class NumberUtils {
 		return (double) Math.round(d * 100000) / 100000;
 	}
 	
+	public static boolean isInt(double d) {
+		return d == (int) d;
+	}
+	
 }

@@ -73,6 +73,17 @@ public class Fraction implements MatrixElement<Fraction> {
 	}
 	
 	@Override
+	public Fraction multiply(double d) {
+		
+		if (NumberUtils.isInt(d)) {
+			return this.multiply(new Fraction((int) d));
+		} else {
+			return this.multiply(new Fraction((int) d)); //TODO: Replace this with double constructor once it's written
+		}
+		
+	}
+	
+	@Override
 	public String toString() {
 		
 		if (numerator.intValue() == 0) {
