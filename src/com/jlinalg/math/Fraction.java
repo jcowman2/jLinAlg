@@ -16,6 +16,8 @@ public class Fraction implements MatrixElement<Fraction> {
 		this.numerator = num;
 		this.denominator = denom;
 		
+		this.simplify();
+		
 	}
 	
 	public Fraction(int num, int denom) {
@@ -40,6 +42,19 @@ public class Fraction implements MatrixElement<Fraction> {
 	
 	public BigInteger getDenominator() {
 		return this.denominator;
+	}
+	
+	private void simplify() {
+		
+		BigInteger gcd = this.numerator.gcd(this.denominator);
+		this.numerator = this.numerator.divide(gcd);
+		this.denominator = this.denominator.divide(gcd);
+		
+		if (this.denominator.signum() == -1) {
+			this.numerator = this.numerator.negate();
+			this.denominator = this.denominator.negate();
+		}
+		
 	}
 	
 	@Override

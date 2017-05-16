@@ -23,7 +23,7 @@ public class MatrixElementTest {
 		System.out.println(new Fraction().toString());
 		System.out.println(new Fraction(38, 123).toString());
 		System.out.println(new Fraction(6).toString());
-		System.out.println(new Fraction(BigInteger.valueOf(4), BigInteger.valueOf(5)));
+		System.out.println(new Fraction(BigInteger.valueOf(4), BigInteger.valueOf(6)));
 		
 	}
 	
@@ -46,9 +46,9 @@ public class MatrixElementTest {
 		Fraction fracs[] = new Fraction[4];
 		
 		for (int i = 0; i < 4; i++) {
-			int d = NumberUtils.randomInt(-100, 100);
+			int d = NumberUtils.randomInt(-20, 20);
 			d = (d == 0) ? d + 1 : d;
-			fracs[i] = new Fraction(NumberUtils.randomInt(-100,100), d);
+			fracs[i] = new Fraction(NumberUtils.randomInt(-1 * Math.abs(d),Math.abs(d)), d);
 		}
 		
 		for (int i = 0; i < 4; i++) {
