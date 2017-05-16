@@ -28,6 +28,19 @@ public class Fraction implements MatrixElement<Fraction> {
 		return this;
 		
 	}
+	
+	@Override
+	public String toString() {
+		
+		if (numerator.intValue() == 0) {
+			return String.valueOf(0);
+		} else if (denominator.intValue() == 1) {
+			return numerator.toString();
+		} else {
+			return new StringBuilder().append(this.numerator.toString()).append("/").append(this.denominator.toString()).toString();
+		}
+		
+	}
 
 
 }
