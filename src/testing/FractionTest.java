@@ -2,6 +2,7 @@ package testing;
 
 import java.math.BigInteger;
 
+import com.jlinalg.graphic.Printer;
 import com.jlinalg.math.*;
 
 public class FractionTest {
@@ -17,6 +18,8 @@ public class FractionTest {
 		testMultiplication();
 		
 		testDoubleConstructor();
+		
+		testScalarMultiplication();
 		
 	}
 	
@@ -89,6 +92,27 @@ public class FractionTest {
 		
 		for (double d : doubs) {
 			System.out.println(String.valueOf(d) + " --> " + new Fraction(d).toString());
+		}
+		
+	}
+	
+	public static void testScalarMultiplication() {
+		
+		System.out.println("\n~Testing scalar multiplication");
+		
+		Fraction fracs[] = {new Fraction(3), 
+							new Fraction(2.5), 
+							new Fraction(45, 100),
+							new Fraction(33,6),
+							new Fraction(),
+							new Fraction(1982)};
+		double doubs[] = {2.5, 3, 121.5, 1, 8383.21, 0.0001};
+		
+		for (int i = 0; i < 6; i++) {
+			System.out.println(String.format("%s * (%s) = %s", 
+								Printer.elementToString(doubs[i]), 
+								fracs[i].toString(), 
+								new Fraction(fracs[i]).multiply(doubs[i]).toString())); 
 		}
 		
 	}
