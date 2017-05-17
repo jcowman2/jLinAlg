@@ -16,6 +16,8 @@ public class FractionTest {
 		
 		testMultiplication();
 		
+		testDoubleConstructor();
+		
 	}
 	
 	public static void testConstruction() {
@@ -77,6 +79,18 @@ public class FractionTest {
 				System.out.println(fracs[i].toString() + " * " + fracs[j].toString() + " = " + fracs[i].multiply(fracs[j]).toString());
 			}
 		}
+	}
+	
+	public static void testDoubleConstructor() {
+		
+		System.out.println("\n~Testing double constructor");
+		
+		double doubs[] = {1.5, 6, 1.679, 100.5, 329871.123873, 23.200};
+		
+		for (double d : doubs) {
+			System.out.println(String.valueOf(d) + " --> " + new Fraction(d).toString());
+		}
+		
 	}
 
 

@@ -28,6 +28,35 @@ public class Fraction implements MatrixElement<Fraction> {
 		this(num, 1);
 	}
 	
+	public Fraction(double d) {
+		
+		String str = String.valueOf(d);
+		
+		boolean inTrailingZeroes = true;
+		int numDecimals = 0;
+		
+		for (int i = 1; i <= str.length(); i++) {
+			
+			char c = str.charAt(str.length() - i);
+			
+			if (c != '0' && inTrailingZeroes) {
+				inTrailingZeroes = false;
+			}
+			
+			if (!inTrailingZeroes) {
+				if (c == '.') {
+					this.numerator = BigInteger.valueOf((long) (d * Math.pow(10, numDecimals)));
+					this.denominator = BigInteger.valueOf((long) Math.pow(10, numDecimals));
+					this.simplify();
+				} else {
+					numDecimals++;
+				}
+			}
+			
+		}
+		
+	}
+	
 	public Fraction() {
 		this(0, 1);
 	}
@@ -78,7 +107,7 @@ public class Fraction implements MatrixElement<Fraction> {
 		if (NumberUtils.isInt(d)) {
 			return this.multiply(new Fraction((int) d));
 		} else {
-			return this.multiply(new Fraction((int) d)); //TODO: Replace this with double constructor once it's written
+			return this.multiply(new Fraction(d));
 		}
 		
 	}
